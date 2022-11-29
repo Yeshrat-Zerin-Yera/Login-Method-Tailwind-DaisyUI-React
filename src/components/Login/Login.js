@@ -4,7 +4,7 @@ import { FaGoogle, FaFacebook, FaGithub } from 'react-icons/fa';
 import { AuthContext } from '../../contexts/UserContext';
 
 const Login = () => {
-    const { signIn } = useContext(AuthContext);
+    const { signIn, googleSignIn } = useContext(AuthContext);
     const navigate = useNavigate();
     const location = useLocation();
     const from = location.state?.from?.pathname || '/';
@@ -26,6 +26,16 @@ const Login = () => {
                 console.error(error);
                 alert(error.message);
             })
+    }
+
+    const handleGoogleSignIn = () => {
+        googleSignIn()
+            .then(result => {
+                const user = result.user;
+                console.log(user);
+                navigate(from, { replace: true });
+            })
+            .catch(error => console.error(error))
     }
 
     return (
@@ -53,7 +63,7 @@ const Login = () => {
                     </div>
                     <div className="divider">OR</div>
                     <div>
-                        <button className='btn btn-circle'><FaGoogle /></button>
+                        <button onClick={handleGoogleSignIn} className='btn btn-circle'><FaGoogle /></button>
                         <button className='btn btn-circle mx-2'><FaFacebook /></button>
                         <button className='btn btn-circle'><FaGithub /></button>
                     </div>
