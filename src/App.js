@@ -6,6 +6,7 @@ import Shop from './components/Shop/Shop';
 import About from './components/About/About';
 import Login from './components/Login/Login';
 import SignUp from './components/SignUp/SignUp';
+import PrivateRoute from './routes/PrivateRoute';
 
 function App() {
   const router = createBrowserRouter([
@@ -19,7 +20,7 @@ function App() {
         },
         {
           path: '/shop',
-          element: <Shop></Shop>
+          element: <PrivateRoute><Shop></Shop></PrivateRoute>
         },
         {
           path: '/about',
