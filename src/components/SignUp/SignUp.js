@@ -1,13 +1,11 @@
-import React, { useContext, useState } from 'react';
-import { Link, useLocation, useNavigate } from 'react-router-dom';
+import React, { useContext } from 'react';
+import { Link, useNavigate } from 'react-router-dom';
 import { FaGoogle, FaFacebook, FaGithub } from 'react-icons/fa';
 import { AuthContext } from '../../contexts/UserContext';
 
 const SignUp = () => {
     const { createUser } = useContext(AuthContext);
     const navigate = useNavigate();
-    const location = useLocation();
-    const from = location.state?.from?.pathname || '/';
 
     const handleSubmit = event => {
         event.preventDefault();
@@ -24,7 +22,7 @@ const SignUp = () => {
                 const user = result.user;
                 console.log(user);
                 form.reset();
-                navigate(from, { replace: true });
+                navigate('/');
             })
             .catch(error => {
                 console.error(error);
